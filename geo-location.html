@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <title>geo location</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+        body {margin: 10px;}
+        .information, .container-main,
+        .container-report, .geo-btn, .container-error {margin-top:25px}
+        .form-control {display: inline; width: 230px;}
+        .container-error{ padding: 10px; width: 376px; border-radius: 4px;}
+    </style>
+</head>
+<body>
+    <div>
+    <header>
+        <h1>Weather Report</h1>
+    </header>
+
+        <button id="js-geo-btn" class="geo-btn btn btn-primary">Get your Location</button>
+
+        <div id="js-container-main" class="container-main">
+            <div id="js-container-geo" class="container-geo hidden">
+                <ul>
+                    <li>Latitude: <span id="js-lat"></span></li>
+                    <li>Longitude: <span id="js-lon"></span></li>
+                    <li>Accuracy: <span id="js-acc"></span> meters</li>
+                </ul>
+            </div>
+            <div id="js-container-search" class="container-search hidden">
+                <div>Serach by city and country or zip-code</div>
+                <input type="text" id="js-citySerach" class="form-control" placeholder="City, Country or zip-code" />
+                <button id="js-geo-search" class="geo-search btn btn-default">Find your Location</button>
+            </div>
+            <div id="js-container-report" class="container-report hidden">
+                <span id="js-city"></span>,
+                <span id="js-country"></span>
+                <span id="js-weather-main"></span>
+                <div>
+                    <img id="js-img-icon" style="vertical-align: middle;" />
+                    <span id="js-weather-temp"></span><sup>&deg;F</sup>
+                    <span id="js-weather-description"></span>
+                </div>
+            </div>
+            <div id="js-container-error"></div>
+
+        </div>
+        <div class="information bg-info">
+            <div>navigator.geolocation:</div>
+            <ul>
+                <li>navigator.geolocation.getCurrentPosition(success, error, option)</li>
+                <li>watchPostion</li>
+                <li>clearWatch</li>
+            </ul>
+            <div>Related information:</div>
+            <ul>
+                <li><a href="http://www.latlong.net/Show-Latitude-Longitude.html" target="_blank">Show Latitude Longitude</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation" target="_blank">Using geolocation - Web API Interfaces | MDN</a></li>
+            </ul>
+        </div>
+    </div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="./scripts/location-script.js"></script>
+</body>
+</html>
