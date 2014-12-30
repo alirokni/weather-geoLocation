@@ -1,14 +1,17 @@
+'use strict';
+
 // Immediately-Invoked Function Expression (IIFE) of weather report
-(function intialCityWeatherReport(){
+(function intialCityWeatherReport() {
     var intialCity = 'Paris';
-    searchGetLocation( intialCity );
+    searchGetLocation(intialCity);
 })();
 
 // main functions
 $(function () {
     $('#js-geo-btn').on('click', findMyLocationWeather);
     $('#js-geo-search').on('click', searchLocationEnter);
-    setTimeout(function(){$('.information .js-geolocation-note').removeClass('bg-warning');},3000);
+    var setMessageTimerMain = new SetMessageTimer('.information .js-geolocation-note', 'bg-warning', 3000);
+    setMessageTimerMain.showMessage();
 });
 
 // html5 geo location function to access geographical location information of hosting device 
@@ -21,7 +24,8 @@ function findMyLocationWeather() {
         navigator.geolocation.getCurrentPosition(geoSuccess, geoFail);
         $('#js-container-message').text('Loading ...').addClass('container-message bg-info');
         $('.information .js-geolocation-note').addClass('bg-warning');
-        setTimeout(function(){$('.information .js-geolocation-note').removeClass('bg-warning');},3000);
+        var setMessageTimerFind = new SetMessageTimer('.information .js-geolocation-note', 'bg-warning', 3000);
+        setMessageTimerFind.showMessage();
     }
 
     // on success, get and display the corrodincations and call openWeatherApi using latitude and longitude
@@ -41,7 +45,8 @@ function findMyLocationWeather() {
             errorMessage = error.message + '. Please \'Allow\' use of your computer location on browser\'s address bar and reload this page.';
             $('#js-container-message').text(errorMessage).addClass('container-message bg-danger');
             $('.information .js-geolocation-note').addClass('bg-warning');
-            setTimeout(function(){$('.information .js-geolocation-note').removeClass('bg-warning');},3000);
+            var setMessageTimerFail = new SetMessageTimer('.information .js-geolocation-note', 'bg-warning', 3000);
+            setMessageTimerFail.showMessage();
         } else {
             $('#js-container-search').removeClass('hidden');
             searchLocationEnter();
@@ -79,10 +84,22 @@ function accessLocation(cityName, $latitude, $longitude){
 }
 
 // helper function for temperature conversion of Kelvin to Farhrenheit
-function KelvinToFahrenheit(temperature ){
-    var temp = Math.round(((temperature - 273.15) * 9 / 5) + 32);
-    return temp;
+var KelvinToFahrenheit = function(_temperature) {    
+    var temp = _temperature;
+    this.doConversion = function (){ //public
+        return Math.round(((temp - 273.15) * 9 / 5) + 32);
+    };
 }
+
+// helper function for showing messages in a timely fashion
+var SetMessageTimer = function(_element, _className, _timer) {
+    var element = _element; // private
+    var className = _className;  // private
+    var timer = _timer;  // private
+    this.showMessage = function (){ //public
+        window.setTimeout(function(){$(element).removeClass(className); } ,timer);
+    };
+};
 
 // call openWeatherApi json data on success and display the result else show the error message
 function searchGetLocation(cityName, $latitude, $longitude) {
@@ -91,21 +108,23 @@ function searchGetLocation(cityName, $latitude, $longitude) {
     $.ajax({
         type: 'GET',
         dataType: 'json',
-        url: 'http://api.openweathermap.org/data/2.5/weather?APPID=1111111111',
+        url: 'http://api.openweathermap.org/data/2.5/weather?APPID=Your-APP-ID',
         data: accessLocation(cityName, $latitude, $longitude),
         success: function (weather) {
+            var toFahrenheit = new KelvinToFahrenheit(weather.main.temp);
             if (weather.cod !== '404') {
                 $('#js-container-message').text('').removeClass('container-message bg-danger');
                 $('#js-city').text(weather.name);
                 $('#js-country').text(weather.sys.country);
                 $('#js-weather-description').text(weather.weather[0].description);
-                $('#js-weather-main').text(weather.weather[0].main);
-                $('#js-weather-temp').text( KelvinToFahrenheit(weather.main.temp) );
+                $('#js-weather-main').text();
+                $('#js-weather-temp').text(toFahrenheit.doConversion());
                 $('#js-img-icon').prop('src', 'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png');
                 $('#js-container-report').removeClass('hidden');
             } else {
                 $('#js-container-message').text(weather.message).addClass('container-message bg-danger');
-                setTimeout(function(){$('#js-container-report').removeClass('bg-success');},3000);
+                var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
+                setMessageTimerCall.showMessage();
             }
         },
         error: function (textStatus, error) {
