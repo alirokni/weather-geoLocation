@@ -3,63 +3,68 @@
 <head>
     <title>geo location</title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
-    <style>
-        body {margin: 10px;}
-        .information, .container-main,
-        .container-report, .geo-btn, .container-error {margin-top:25px}
-        .form-control {display: inline; width: 230px;}
-        .container-error{ padding: 10px; width: 376px; border-radius: 4px;}
-    </style>
+    <link rel="stylesheet" href="styles/location-style.css">
 </head>
 <body>
-    <div>
+<div>
     <header>
-        <h1>Weather Report</h1>
+         <h1>Weather Report</h1>
     </header>
 
-        <button id="js-geo-btn" class="geo-btn btn btn-primary">Get your Location</button>
-
-        <div id="js-container-main" class="container-main">
-            <div id="js-container-geo" class="container-geo hidden">
-                <ul>
-                    <li>Latitude: <span id="js-lat"></span></li>
-                    <li>Longitude: <span id="js-lon"></span></li>
-                    <li>Accuracy: <span id="js-acc"></span> meters</li>
-                </ul>
-            </div>
-            <div id="js-container-search" class="container-search hidden">
-                <div>Serach by city and country or zip-code</div>
-                <input type="text" id="js-citySerach" class="form-control" placeholder="City, Country or zip-code" />
-                <button id="js-geo-search" class="geo-search btn btn-default">Find your Location</button>
-            </div>
-            <div id="js-container-report" class="container-report hidden">
-                <span id="js-city"></span>,
-                <span id="js-country"></span>
-                <span id="js-weather-main"></span>
-                <div>
-                    <img id="js-img-icon" style="vertical-align: middle;" />
-                    <span id="js-weather-temp"></span><sup>&deg;F</sup>
-                    <span id="js-weather-description"></span>
-                </div>
-            </div>
-            <div id="js-container-error"></div>
-
-        </div>
-        <div class="information bg-info">
-            <div>navigator.geolocation:</div>
-            <ul>
-                <li>navigator.geolocation.getCurrentPosition(success, error, option)</li>
-                <li>watchPostion</li>
-                <li>clearWatch</li>
-            </ul>
-            <div>Related information:</div>
-            <ul>
-                <li><a href="http://www.latlong.net/Show-Latitude-Longitude.html" target="_blank">Show Latitude Longitude</a></li>
-                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation" target="_blank">Using geolocation - Web API Interfaces | MDN</a></li>
-            </ul>
+    <div id="js-header-report" class="header-report">
+        Today's weather report of <b><span id="js-city"></span></b>, <span id="js-country"></span>:
+    </div>
+    <div id="js-container-report" class="container-report hidden">
+        <div>
+            <img id="js-img-icon" style="vertical-align: middle;" />
+            <span id="js-weather-temp"></span><sup>&deg;F</sup>
+            <span id="js-weather-description"></span>
         </div>
     </div>
+    <div id="js-container-message" class="container-message"></div>
+    <ul id="js-container-geo" class="container-geo">
+        <li class="weather-intro">
+            Get weather report of your location or any other location; let it be found<sup>1</sup>or search<sup>2</sup> for it:
+        </li>
+        <li class="geo-location">
+            <div id="loader"></div>
+            <button id="js-geo-btn" class="geo-btn btn btn-primary">Find your Geolocation</button>
+            <ul id="js-location-list" class="location-list hidden">
+                <li>Latitude: <span id="js-lat"></span></li>
+                <li>Longitude: <span id="js-lon"></span></li>
+                <li>Accuracy: <span id="js-acc"></span> meters</li>
+            </ul>
+        </li>
+        <li class="search-location">
+            <div id="js-container-search" class="container-search">
+                <input type="text" id="js-citySerach" class="form-control" placeholder="City or zip-code" />
+                <button id="js-geo-search" class="geo-search btn btn-default">Serach</button>
+            </div>
+        </li>
+    </ul>
+
+    <div class="information bg-info">
+        To provide weather report for your location or any other locations, you can:
+        <ol>
+            <li>Use HTML5 Geolocation API <sup>*</sup></li>
+            <li>Search by entering city and country or zip-code</li>
+        </ol>
+        <div><sup>*</sup> This application relies on accessing geographical location information of hosting device,
+        to use <b>Find your Geolocation</b> of HTML5 Geolocation API, you need to grant permission -to this application- to use your geographic location.
+        once permission granted, the coordinations of your device's position will be retrieved (and displayed in this page). </div>
+    </div>
+
+    <div class="information bg-info">
+        <div>Related information:</div>
+        <ul>
+            <li><a href="http://www.latlong.net/Show-Latitude-Longitude.html" target="_blank">Show Latitude Longitude</a>
+            </li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation" target="_blank">Using geolocation - Web API Interfaces | MDN</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="./scripts/location-script.js"></script>
+<script src="scripts/location-script.js"></script>
 </body>
 </html>

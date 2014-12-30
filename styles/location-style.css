@@ -1,0 +1,22 @@
+body {
+    margin: 1em;
+}
+.information {
+    margin-top:2em;
+    padding: 1em;
+}
+.form-control {
+    display: inline;
+    width: 230px;
+}
+.container-message {
+    padding: 10px;
+    border-radius: 4px;
+}
+.container-geo{
+    list-style-type: none;
+    padding: 0;
+}
+.search-location, .geo-location, .container-geo{
+    margin: 2em 0;
+}
