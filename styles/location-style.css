@@ -1,22 +1,38 @@
+html { 
+    font-size: 62.5%; 
+}
 body {
     margin: 1em;
+    font: normal 1.4rem 'Palatino Linotype', Arial, Verdana, Helvetica, sans-serif; /* = 14px */
+}
+h1.title {
+    font-size: 2.4rem; /* =24px */
+}
+.header-report h1 {
+    font-size: 1.4rem; /* =14px */
 }
 .information {
-    margin-top:2em;
-    padding: 1em;
+    margin-top:3rem;
+    padding: 1rem;
 }
-.form-control {
+.location-serach, form-control {
     display: inline;
     width: 230px;
 }
 .container-message {
-    padding: 10px;
+    padding: 1.2rem;
     border-radius: 4px;
 }
 .container-geo{
     list-style-type: none;
     padding: 0;
 }
-.search-location, .geo-location, .container-geo{
-    margin: 2em 0;
+.search-location, .geo-location, .container-geo {
+    margin: 2rem 0;
+}
+.geo-search {
+    margin-top: -3px;
+}
+.location-list li:first-child {
+    margin-top: 1rem;
 }
