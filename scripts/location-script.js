@@ -1,26 +1,27 @@
-// intial funtion on load of weather report
-$( window ).load(function() {
+// Immediately-Invoked Function Expression (IIFE) of weather report
+(function intialCityWeatherReport(){
     var intialCity = 'Paris';
     searchGetLocation( intialCity );
-});
+})();
 
-// main function
+// main functions
 $(function () {
     $('#js-geo-btn').on('click', findMyLocationWeather);
     $('#js-geo-search').on('click', searchLocationEnter);
-    setTimeout(function(){$('.information:first li:first').removeClass('bg-warning');},3000);
+    setTimeout(function(){$('.information .js-geolocation-note').removeClass('bg-warning');},3000);
 });
 
-var $latitude, $longitude;
+// html5 geo location function to access geographical location information of hosting device 
 function findMyLocationWeather() {
+    var $latitude, $longitude;
     // check if browser supports geo location and get coordination, else call search by city name function
     if (!navigator.geolocation) {
         $('#js-container-message').text('Your browser is not supporting html5 geo location.\nA Please use Search for your location.').addClass('container-message bg-danger');
     }else{
         navigator.geolocation.getCurrentPosition(geoSuccess, geoFail);
         $('#js-container-message').text('Loading ...').addClass('container-message bg-info');
-        $('.information:first li:first').addClass('bg-warning');
-        setTimeout(function(){$('.information:first li:first').removeClass('bg-warning');},3000);
+        $('.information .js-geolocation-note').addClass('bg-warning');
+        setTimeout(function(){$('.information .js-geolocation-note').removeClass('bg-warning');},3000);
     }
 
     // on success, get and display the corrodincations and call openWeatherApi using latitude and longitude
@@ -32,14 +33,15 @@ function findMyLocationWeather() {
         $('#js-acc').text(position.coords.accuracy);
         findLocationCoordination($latitude, $longitude);
     }
+    
     // on failure of permission denied, show an error message. On other errors call search function
     function geoFail(error) {
         var errorMessage = '';
         if (error.code === 1) { //  geoError = { 1: 'PERMISSION DENIED', 2: 'POSITION UNAVAILABLE', 3: 'TIMEOUT' };
             errorMessage = error.message + '. Please \'Allow\' use of your computer location on browser\'s address bar and reload this page.';
             $('#js-container-message').text(errorMessage).addClass('container-message bg-danger');
-            $('.information:first li:first').addClass('bg-warning');
-            setTimeout(function(){$('.information:first li:first').removeClass('bg-warning');},3000);
+            $('.information .js-geolocation-note').addClass('bg-warning');
+            setTimeout(function(){$('.information .js-geolocation-note').removeClass('bg-warning');},3000);
         } else {
             $('#js-container-search').removeClass('hidden');
             searchLocationEnter();
@@ -47,50 +49,50 @@ function findMyLocationWeather() {
     }
 }
 
-//construction of openWeatherApi url with geo location coordination
+// helper function for accessing geo location coordination and passing it to openWeatherApi
 function findLocationCoordination($latitude, $longitude) {
     searchGetLocation('', $latitude, $longitude);
     $('#js-container-report').addClass('bg-success');
     $('#js-location-list').removeClass('hidden');
 }
 
-// construction of openWeatherApi url with search query
+// Get the search query if it is entered and passing it to openWeatherApi
 function searchLocationEnter() {
-    var $serachVal = $('#js-citySerach').val();
+    var $serachVal = $('#js-location-serach').val();
     $('#js-location-list').addClass('hidden');
-    // validation for empty serach value
     if (!!$serachVal.length) {
         searchGetLocation($serachVal);
         $('#js-container-report').addClass('bg-success');
     }
 }
 
-// converstion of Kelvin to Farhrenheit
+// helper function to build weather query paramter 
+function accessLocation(cityName, $latitude, $longitude){
+    var weatherParam;
+    if(cityName){
+        weatherParam = 'q=' + cityName;
+    }else{
+        weatherParam = '&lat=' + $latitude + '&lon=' + $longitude;
+    }    
+    $('#js-container-report').addClass('bg-success');
+    return weatherParam;
+}
+
+// helper function for temperature conversion of Kelvin to Farhrenheit
 function KelvinToFahrenheit(temperature ){
     var temp = Math.round(((temperature - 273.15) * 9 / 5) + 32);
     return temp;
 }
 
-// on success get openWeatherApi json data and display the result else show the error message
+// call openWeatherApi json data on success and display the result else show the error message
 function searchGetLocation(cityName, $latitude, $longitude) {
-    $('#js-citySerach').val('');
-    var city = cityName,
-        weatherParam;
-    if(city){
-        weatherParam = 'q=' + city;
-    }else{
-        weatherParam = '&lat=' + $latitude + '&lon=' + $longitude;
-    }
-
+    $('#js-location-serach').val('');
     $('#js-container-message').text('Loading ...').addClass('container-message bg-info');
     $.ajax({
         type: 'GET',
         dataType: 'json',
-        url: 'http://api.openweathermap.org/data/2.5/weather',
-        data: weatherParam,
-        beforeSend: function() {
-            //$('#js-container-message').text('Loading ...').addClass('container-message bg-info');
-        },
+        url: 'http://api.openweathermap.org/data/2.5/weather?APPID=1111111111',
+        data: accessLocation(cityName, $latitude, $longitude),
         success: function (weather) {
             if (weather.cod !== '404') {
                 $('#js-container-message').text('').removeClass('container-message bg-danger');
