@@ -1,0 +1,247 @@
+/**/
+a.external {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVElEQVR42n3PgQkAIAhEUXdqJ3dqJ3e6IoTPUSQcgj4EQ5IlUiLE0Jil3PECXhcHGBhZ8kg4hwxAu3MZeCGeyFnAXp4hqNQPnt7QL0nADpD6wHccLvnAKksq8iiaAAAAAElFTkSuQmCC) center right no-repeat;
+  padding-right: 13px;
+}
+
+a.navigation:link, a.navigation:visited, a.navigation:active {
+  padding: 1% 2%;
+}
+
+a.navigation:hover {
+color: white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.row {
+  padding: 5px;
+  margin: 5px;
+}
+
+.list-no-space, ul.list-no-space li {
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+}
+
+ul.list-no-space li:after {
+  content: ', ';
+}
+
+.last {
+  color: inherit;
+}
+
+.last:after {
+  content: ' ' !important;
+}
+
+.range input {
+  text-align: right;
+  display: inline;
+  width: 250px;
+}
+
+ul.input-range {
+  padding: 0 20px;
+}
+
+.tabs-1 {
+  margin-right: 15px;
+}
+
+.tabs-5 {
+  padding: 0 0 0 15px;
+}
+
+.contenttxt, .boilerplate {
+  padding: 2% 5%;
+}
+
+.boilerplate {
+  background-color:#ffffff;
+}
+
+.mainContent {
+  padding-top: 25px;
+  width: 80%;
+  line-height: 2em;
+}
+
+#nav {
+  width: 100%;
+  padding: 20px 5px;
+}
+
+.contentTable {
+  padding: 5px;
+  float: none;
+}
+
+header.vcard {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.view-animate-container {
+  position: relative;
+  height: auto;
+}
+
+.view-animate {
+ z-index: -1;
+  /*padding: 10px;*/
+}
+
+.view-animate.ng-enter {
+  -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+}
+
+.view-animate.ng-leave {
+  -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s;
+  -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s;
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s;
+}
+
+.view-animate.ng-enter, .view-animate.ng-leave {
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /*padding: 10px;*/
+}
+
+.view-animate.ng-enter {
+  /*left:100%;*/
+  top: -150px;
+}
+
+.view-animate.ng-enter.ng-enter-active {
+  /*left:0;*/
+  top: 0;
+}
+
+.view-animate.ng-leave.ng-leave-active {
+  /*left:-100%;*/
+  top: 50px;
+}        
+
+abbr[title] {
+  border-bottom-color: inherit;    
+}
+
+a abbr[title] {
+cursor: auto;
+}
+
+footer {
+  border: 0;
+  position: fixed;
+  bottom: 0;
+  font-size: small;
+}
+
+footer div{
+  text-align: center;
+background: #adadad url(../images/bg-gray.png) repeat-x center;
+  clear: both;
+  list-style: none;
+  border: 1px solid #f93;
+  margin: 0 auto;
+  padding: 0 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -moz-box-shadow: #003250 5px 5px 5px;
+  -webkit-box-shadow: #003250 5px 5px 5px;
+  box-shadow: #003250 5px 5px 5px;
+  color: #535353;
+  border-radius: 5px;
+  width: 80%;    
+}
+
+input, label {
+  width: inherit; 
+  height: inherit; 
+  font: inherit;
+  float: none;
+  display: inline-flex;    
+}
+
+input[type="text"], input[type="email"], textarea {
+  margin-left: 110px;
+  width: 87% !important;
+}
+
+input.clear {
+  float: right;
+}
+
+.left-space {
+    margin-left: 15px;
+}
+
+.changed{
+   background-color: #f93;
+}
+
+header.vcard {
+    background: url(../images/sunflower.jpg) no-repeat center center;
+}
+
+header.rwd {
+    background: url(../images/ggb.jpg) no-repeat center center;
+}
+
+.vcard.update {
+    background: url(../images/buddha.JPG) no-repeat center center;
+}
+
+.vcard.performance {
+    background: url(../images/pier.jpg) no-repeat center center;
+}
+
+.vcard.bookmark {
+    background: url(../images/bookstore.jpg) no-repeat center center;
+}
+
+.vcard.contact {
+    background: url(../images/carmel.jpg) no-repeat center center;
+}
+
+header {
+    padding: 25px 0;
+}
+
+@media (min-width: 992px) {
+    .col-md-5 {
+        border-left: 1px dashed #f93;
+    }
+}
+
+@media screen and (max-width: 480px){
+.footer {
+position: static;
+font-size: x-small;
+}
+#nav{
+display:block;
+padding: 0;
+}
+
+}

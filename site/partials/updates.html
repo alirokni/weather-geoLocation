@@ -1,0 +1,44 @@
+<article class="contentTable" ng-controller="updatesContoller">
+    <section id="tabs">
+        <header id="Updates">
+            <a href="#" class="home">
+                Go Up
+            </a>
+            <h1 class="header2"> 
+            /    {{model.title}}
+            </h1>
+            <nav>
+                <form name="range" class="range">
+                    <input type="range" id="range" min="0" max="4" step="1" value="0" update-click-event>
+                    <ul class="input-range">
+                        <li class="tabs-1 light-color" update-click-event>12/14</li>
+                        <li class="tabs-2" update-click-event>01/14</li>
+                        <li class="tabs-3" update-click-event>10/13</li>
+                        <li class="tabs-4" update-click-event>06/11</li>
+                        <li class="tabs-5" update-click-event>10/10</li>
+                    </ul>
+                </form>
+            </nav>
+        </header> 
+
+        <div class="contenttxt" id="tabs-5">
+                <time datetime="2014-12-01">December 2014</time> - Once agin, an update to the site; using <a href="https://angularjs.org/"  external>AngularJS</a> and some of its features. The site is rending as a Single Page Application (<abbr title="Single Page Application">SPA</abbr>). Ultimatly, The process will be available at <a href="//github.com/alirokni/" external>github.com/alirokni/</a>.
+        </div>  
+
+        <div class="contenttxt" id="tabs-4">
+                <time datetime="2014-01-02">January 2014</time> - Rokni.net is showing the result of serverside templating using Node.js and Mustache, the process is available at <a href="//github.com/alirokni/rokni-net" external>github.com/alirokni/rokni-net</a>. Also, running node and client side templating with Mustache is avaible at <a href="//www.rokni.net:8080/index.html" external>www.rokni.net:8080/index.html</a>.
+        </div>        
+        
+        <div class="contenttxt" id="tabs-3">
+                <time datetime="2013-10-01">October 2013</time> - The site is getting ready for a major overhaul of server side templating using Node.js and Mustache. Its process is available at <a href="//github.com/alirokni/rokni-net" external>github.com/alirokni/rokni-net</a>
+        </div>
+            
+        <div class="contenttxt" id="tabs-2">
+                <time datetime="2011-06-01">June 2011</time> - As more capable browsers are introduced, the site shall continue its progress for implementing HTML5, CSS3, AJAX and PHP functionalities while degrade nicely for older browsers.
+        </div>
+        
+        <div class="contenttxt" id="tabs-1">
+                <time datetime="2010-10-01">October 2010</time> - The site is changing to use HTML5, more CSS3 and probably AJAX for functionality. Its progress depends on finding a balance between maintenance and layout. Also, I have an eye on tablets and smartphones for this iteration.
+        </div>
+    </section>
+</article>

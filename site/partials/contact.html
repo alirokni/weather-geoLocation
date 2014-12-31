@@ -1,0 +1,44 @@
+<article class="contentTable" ng-app="contactApp" ng-controller="contactContoller">
+<section>
+            <header id="Responsive%20Web%20Design">
+                <a href="#" class="home">
+                    Go Up
+                </a>
+                <h1 class="header2"> 
+                    {{model.title}} <span class="text-danger"><b>Coming Soon<b></span>
+                </h1>
+            </header> 
+<div class="contenttxt">
+  <form name="oForm" class="form-group" novalidate role="form" ng-controller="TestCtrl">
+    <fieldset id="ContactForm" class="ContactForm-list">
+    <legend>Contact Form</legend>
+    <div class="ContactForm-list">
+        
+        <div class="form-group" ng-model="name">
+            <label for="name">{{name || 'Name'}}</label>
+            <span class="label label-danger" ng-show="oForm.$submitted || oForm.name.$error.required">Required!</span>
+            <input type="text" name="name" ng-model="name" ng-class="{changed: oForm.name.$pristine}" class="form-control" required pattern="^[-\w]+$" />
+        </div>
+        
+        <div class="form-group" ng-model="email">
+            <label for="email" >{{email || 'E-mail'}}</label>
+            <span class="label label-danger" ng-show="oForm.$submitted || oForm.email.$error.required">Required!</span>
+            <input type="email" name="email" minlength="5" maxlength="100" ng-model="email" class="form-control" ng-class="{changed: oForm.email.$pristine}" required placeholder="example@address.com" pattern="^\S+@\S+[\.][0-9a-z]+$"/>  
+        </div>
+        <div class="form-group">
+            <label for="message">Your Message:</label>
+            <textarea name="message" rows="10" ng-model="message" class="form-control" required placeholder="Your Message" ></textarea>
+        </div>
+        <div class="form-group">
+            <!--input type="button" name="submit" value="Send" class="btn btn-primary btn-lg" btn-action-->
+            <input type="submit" class="btn btn-primary btn-lg" />
+            <!--input type="button" value="Clear All" class="btn btn-default clear" btn-action-->
+        </div>
+
+    </div>
+    </fieldset>
+  <div id="note" class="req margin-neg1"></div>
+  </form>
+</form>
+ </section>
+</article>
