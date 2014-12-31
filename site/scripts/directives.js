@@ -48,19 +48,6 @@ app.directive('updateClickEvent', function () {
 });
 
 
-app.directive('btnAction', function(){
-    return {
-        link: function ($scope, element, attrs) {
-            element.on('click', function(e) {
-                    //sessionStorage.clear();
-                    //$("#note, .req").removeClass("req-on");
-                    $("input[id='subject'], input[id='email'], textarea[id='message']").val("");
-                    //$(".submit").attr("disabled", "disabled");
-            });
-        }    
-    }
-});
-
 // local functions
 
 deliciousApp.directive('deliciousTags', function () {
@@ -70,13 +57,18 @@ deliciousApp.directive('deliciousTags', function () {
     };
 });
 /*
-contactApp.directive('appClick', function(){
-  return {
-        link: function ($scope, element, attrs) {
-            element.on('click', function(e) {
-                alert($('form[name="oForm"]'));
-            });
-        }
+weatherApp.directive('weatherMap', function () {
+    return {
+        restrict : 'E',
+        replace: 'true',
+        templateUrl: 'partials/weather.html'
     }
 });
 */
+contactApp.directive('appClick', function(){
+  return {
+      restrict : 'EA',
+      transclude: true,
+      templateUrl: 'partials/contact-form.html'
+    }
+});

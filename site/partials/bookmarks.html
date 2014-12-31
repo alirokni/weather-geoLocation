@@ -1,21 +1,24 @@
-<article class="contentTable" ng-controller="bookmarksContoller">
+<article class="contentTable" data-ng-controller="bookmarksContoller">
     <header id="Delicious">
         <a href="#" class="home">
             Go Up
         </a>
         <h1 class="header2"> 
-            {{model.title}}
+         / {{model.title}}
         </h1>
     </header>     
     <section ng-app="deliciousApp" class="contenttxt container-fluid">
-            <div>My bookmarks are saved at <a href="https://delicious.com/rokni" external>delicious.com/rokni</a>:</div>
-            <div ng-controller="deliciousController as delicious">
+            <div>My bookmarks are saved at <a href="https://delicious.com/rokni" class="external" external>delicious.com/rokni</a>:</div>
+            
+        <div ng-controller="deliciousController as delicious">
+            <div ng-repeat="bookmark in deliciousEntry">
                 <div ng-if="theStatus == 'error'">connection status: {{theStatus}}</div>
-                <div class="row" ng-repeat="bookmark in deliciousEntry" ng-if="theStatus == 'success'">
-                    <span class="col-xs-12 col-md-7"><a ng-href="{{bookmark.u}}" external>{{bookmark.d}}</a></span>
-                    <span class="col-xs-12 col-md-5">Tags: <delicious-tags></delicious-tags></span>
+                <div class="row" ng-if="theStatus == 'success'">
+                    <span class="col-xs-12 col-md-7"><a ng-href="{{bookmark.u}}" class="external" external>{{bookmark.d}}</a></span>
+                    <span class="col-xs-12 col-md-5">Tags: <delicious-tags bookmark="bookmark"></delicious-tags></span>
                     <!--span class="col-md-3">saved on: {{bookmark.dt | date:"MM/dd/yyyy" }}</span-->
                 </div>
             </div>
+        </div>
     </section>
 </article>

@@ -184,7 +184,6 @@ input, label {
 }
 
 input[type="text"], input[type="email"], textarea {
-  margin-left: 110px;
   width: 87% !important;
 }
 

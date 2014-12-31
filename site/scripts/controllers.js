@@ -24,11 +24,17 @@ app.controller("bookmarksContoller", function($scope){
     title: "Bookmarks"
   }
 });
-app.controller("contactContoller", function($scope){
-  $scope.model = {
-    title: "Contact Me"
-  }
-});
+app.controller("contactContoller", ['$scope',function($scope){
+    $scope.model = {
+        title: "Contact Me"
+    };
+    $scope.saveFrom = function(){
+        var name = this.name;
+        var email = this.email;
+        var message = this.message;
+        alert(name + ", "+ email + ", " + message);
+    }
+}]);
 
 
 // this controller uses service $http to retrive data using JSONP

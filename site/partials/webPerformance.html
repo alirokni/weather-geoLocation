@@ -1,5 +1,5 @@
-<article class="contentTable">
-    <section data-ng-app="myapp" ng-controller="webPerformanceContoller">
+<article class="contentTable" data-ng-app="myapp" ng-controller="webPerformanceContoller">
+    <section>
         <header id="Web%20Performance">
             <a href="#" class="home">
                 Go Up
@@ -9,13 +9,18 @@
             </h1>
         </header> 
         <div class="contenttxt">
-            An interesting topic that I am following and exploring as of now is, Web Performance. I am testing, analyzing and optimizing this site and the Rokni.com with Google <a href="https://developers.google.com/speed/" external>PageSpeed Tools</a>, <a href="https://developers.google.com/closure/compiler/" external>Closure Compiler</a> Service UI, <a href="http://developer.yahoo.com/yslow/" external>YSlow</a> and some other interesting online tools to make the site faster.
+            An interesting topic that I am follwing and exploring as of now is, Web Performance. I am testing, analyzing and optimizing this site and the Rokni.com with Google <a href="https://developers.google.com/speed/" external>PageSpeed Tools</a>, <a href="https://developers.google.com/closure/compiler/" external>Closure Compiler</a> Service UI, <a href="http://developer.yahoo.com/yslow/" external>YSlow</a> and some other interesting online tools to make the site faster.
         </div>
         <div class="contenttxt">
-            Basically, Rokni.net was competing against Rokni.com which uses Google's PageSpeed Service to load faster. The score as chart is available at <a href="//www.rokni.net:8080/index.html"  external>www.rokni.net:8080/index.html</a>. Comparison of two sites are done with similar content till 10/16. After 01/02, they are representing different coding.
+            Basically, Rokni.net was competing against Rokni.com which uses Google's PageSpeed Service to load faster. The score as chart is availble at <a href="//www.rokni.net:8080/index.html"  external>www.rokni.net:8080/index.html</a>. Comparison of two sites are done with similar content till 10/16. After 01/02, they are representing different coding.
         </div>
-        <div class="contenttxt">Updated rokni.net, using <a href="https://angularjs.org/" external>AngularJS</a>, hence, its performance will be tracked against itself. As the process of optimizing performance takes shape following chart will show the score and progress of Web Performance optimization: 
-        </div> 
-        </div>        
+        <div class="contenttxt">Updated rokni.net, using <a href="https://angularjs.org/" external>AngularJS</a>, hence, its perormacne will be trakced against itself. As the process of optimizing performance takes shape following chart will show the score and progress of Web Performance optimization: 
+        </div>    
+        <div class="contenttxt" data-ng-controller="chartctrl">
+            <highchart id="chart1" config="chartConfig"></highchart>
+            <div>
+                The chart is drawn using <a href="https://github.com/pablojim/highcharts-ng" external>highcharts-ng</a>.
+            </div>
+        </div>        
     </section>
 </article>

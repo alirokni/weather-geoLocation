@@ -1,0 +1,30 @@
+<div>
+<form  name="oForm" class="form-group" novalidate role="form" ng-controller="contactContoller">
+    <fieldset id="ContactForm" class="ContactForm-list">
+    <legend ng-transclude>Contact Form</legend>
+    <div class="ContactForm-list">
+
+        <div class="form-group" ng-model="name">
+            <label for="name">{{name || 'Name'}}</label>
+            <span class="label label-danger" ng-show="oForm.$submitted || oForm.name.$error.required">Required!</span>
+            <input type="text" name="name" ng-model="name" ng-class="{changed: oForm.name.$pristine}" class="form-control" required pattern="^[-\w]+$" />
+        </div>
+
+        <div class="form-group" ng-model="email">
+            <label for="email">{{email || 'E-mail'}}</label>
+            <span class="label label-danger" ng-show="oForm.$submitted || oForm.email.$error.required">Required!</span>
+            <input type="email" name="email" minlength="5" maxlength="100" ng-model="email" class="form-control" ng-class="{changed: oForm.email.$pristine}" required placeholder="example@address.com" pattern="^\S+@\S+[\.][0-9a-z]+$" />
+        </div>
+        <div class="form-group">
+            <label for="message">Your Message:</label>
+            <textarea name="message" rows="10" ng-model="message" class="form-control" required placeholder="Your Message" ></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg" ng-click="saveFrom()">Submit</button>
+            <button ng-click="oForm.name.$rollbackViewValue(); name='';oForm.email.$rollbackViewValue(); email='';oForm.message.$rollbackViewValue(); message=''" class="btn btn-default clear">Clear</button>
+        </div>
+
+    </div>
+    </fieldset>
+  </form>
+</div>

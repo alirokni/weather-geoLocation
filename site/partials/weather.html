@@ -1,0 +1,11 @@
+<div ng-app="weatherApp" ng-controller="weatherContoller as weather">
+    {{ weatherMap.message }}
+    <input type="text" ng-model="cityweather" placeholder="Sunnyvale, US" style="margin-left:0; " />
+    <button class="btn btn-primary" ng-click="clickme()">Go</button>
+    <br/>
+    <span>
+        {{weatherMap.weather[0].main}} in {{ weatherMap.name }},  {{ weatherMap.sys.country  }}
+        <br/>
+        <img src="http://openweathermap.org/img/w/{{ weatherMap.weather[0].icon }}.png">  {{ (((weatherMap.main.temp - 273.15)*9/5)+32).toFixed(1) }} °F  {{ weatherMap.weather[0].description }}
+    </span>
+</div>
