@@ -1,5 +1,5 @@
-html { 
-    font-size: 62.5%; 
+html {
+    font-size: 62.5%;
 }
 body {
     margin: 1em;
@@ -8,7 +8,7 @@ body {
 h1.title {
     font-size: 2.4rem; /* =24px */
 }
-.header-report h1 {
+.header-report h1, .forcast-header-report h2 {
     font-size: 1.4rem; /* =14px */
 }
 .information {
@@ -20,7 +20,7 @@ h1.title {
     width: 230px;
 }
 .container-message {
-    border-radius: 4px;
+    border-radius: 0.4rem;
     margin-top: 1rem;
     padding: 1.2rem;
 }
@@ -36,4 +36,23 @@ h1.title {
 }
 .location-list li:first-child {
     margin-top: 1rem;
+}
+.forcast-header-report{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.forcast-container-report{
+    background-color: #eaeaea;
+}
+.forcast-report{
+    border-bottom: 1px solid gray;
+    border-left: 1px solid white;
+    display:inline-block;
+    padding: 0 1em 0 0.5em;
+}
+
+.forcast-report:not(:last-child){
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid white;
 }
