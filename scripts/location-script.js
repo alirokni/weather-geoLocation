@@ -161,8 +161,8 @@ function weatherForecastReport(data) {
             var toDate = new DateConversion(dateObj);
             var showUpdatedDate = toDate.doTimeConversion();
 
-            htmlCode = '<div class="forcast-report col-md-2"><span>('+showUpdatedDate+')</span><br/><img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" /><span>';
-            htmlCode += showUpdatedTemp + '<sup>&deg;F</sup> </span> <span>' + weather.list[i].weather[0].description + '</span>';
+            htmlCode = '<div class="forcast-report col-md-2"><div>'+showUpdatedDate+'</div><img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" /><span>';
+            htmlCode += showUpdatedTemp + '<sup>&deg;F</sup></span><div>' + weather.list[i].weather[0].description + '</div>';
             $('.js-forcast-container-report').append(htmlCode);
         }
         // To extend the border for the last
