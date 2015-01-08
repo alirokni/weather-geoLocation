@@ -13,4 +13,4 @@ This is a repository of an application to access weather JSON data provoided by 
  
 For more information visit https://github.com/alirokni/weather-geoLocation/wiki
 
-An example of the implementation of the code is available at http://jsfiddle.net/alirokni/b03k2vtz/
+An example of the implementation of the code is available at http://www.rokni.net/widgets/weather-geoLocation/geo-location.html
