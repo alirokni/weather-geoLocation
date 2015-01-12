@@ -1,58 +1,77 @@
 html {
     font-size: 62.5%;
 }
+
 body {
+    font: normal 1.4rem 'Palatino Linotype', Arial, Verdana, Helvetica, sans-serif;/* = 14px */
     margin: 1em;
-    font: normal 1.4rem 'Palatino Linotype', Arial, Verdana, Helvetica, sans-serif; /* = 14px */
 }
+
 h1.title {
-    font-size: 2.4rem; /* =24px */
+    font-size: 2.4rem;/* = 24px */;
 }
-.header-report h1, .forcast-header-report h2 {
-    font-size: 1.4rem; /* =14px */
+
+.header-report h1,.forcast-header-report h2 {
+    font-size: 1.4rem;
 }
+
 .information {
-    margin-top:3rem;
+    margin-top: 3rem;
     padding: 1rem;
 }
-.location-serach, form-control {
+
+.location-serach,form-control {
     display: inline;
     width: 230px;
 }
+
 .container-message {
-    border-radius: 0.4rem;
+    border-radius: .4rem;
     margin-top: 1rem;
     padding: 1.2rem;
 }
-.container-geo{
+
+.container-geo {
     list-style-type: none;
     padding: 0;
 }
-.search-location, .geo-location, .container-geo {
+
+.search-location,.geo-location,.container-geo {
     margin: 2rem 0;
 }
+
 .geo-search {
     margin-top: -3px;
 }
-.location-list li:first-child {
-    margin-top: 1rem;
-}
-.forcast-header-report{
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-.forcast-container-report{
-    background-color: #eaeaea;
-}
-.forcast-report{
-    border-bottom: 1px solid gray;
-    border-left: 1px solid white;
-    display:inline-block;
-    padding: 0 1em 0 0.5em;
+
+.location-list {
+    margin: 1rem 0 0;
+    padding: 0;
 }
 
-.forcast-report:not(:last-child){
-    border-right: 1px solid gray;
+.location-list li {
+    display: inline;
+    padding-right: 2.5rem;
+}
+
+.forcast-header-report {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.forcast-container-report {
+    background-color: #eaeaea;
+}
+
+.forcast-report {
     border-bottom: 1px solid gray;
-    border-left: 1px solid white;
+    border-left: 1px solid #FFF;
+    display: inline-block;
+    padding: 0 1em 0 .5em;
+}
+
+.forcast-report:not(:last-child) {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid #FFF;
+    border-right: 1px solid gray;
 }
