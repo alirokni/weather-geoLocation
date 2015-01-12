@@ -6,7 +6,7 @@
 })();
 
 // on dom ready main functions
-$(function () {
+$(function() {
     $('#js-geo-btn').on('click', findMyLocationWeather);
     $('#js-geo-search').on('click', searchLocationEnter);
     var setMessageTimerMain = new SetMessageTimer('.information .js-geolocation-note', 'bg-warning', 3000);
@@ -19,7 +19,7 @@ function findMyLocationWeather() {
     // check if browser supports geo location and get coordination, else call search by city name function
     if (!navigator.geolocation) {
         $('#js-container-message').text('Your browser is not supporting html5 geo location.\nA Please use Search for your location.').addClass('container-message bg-danger');
-    }else{
+    } else {
         navigator.geolocation.getCurrentPosition(geoSuccess, geoFail);
         $('#js-container-message').text('Loading ...').addClass('container-message bg-info');
         $('.information .js-geolocation-note').addClass('bg-warning');
@@ -71,11 +71,11 @@ function searchLocationEnter() {
 }
 
 // helper function to build weather query paramter
-function accessLocation(cityName, $latitude, $longitude){
+function accessLocation(cityName, $latitude, $longitude) {
     var weatherParam;
-    if(cityName){
+    if (cityName) {
         weatherParam = 'q=' + cityName;
-    }else{
+    } else {
         weatherParam = '&lat=' + $latitude + '&lon=' + $longitude;
     }
     $('#js-container-report').addClass('bg-success');
@@ -91,19 +91,23 @@ epochconverter.com/
 
 var TemperatureConversion = function(_temperature) {
     var temp = _temperature;
-    this.doConversion = function (){ //public T(K) × 9/5 - 459.67
-        return ((temp * 9/5) - 459.67).toFixed(1);
+    this.doFahrenheitConversion = function() { //public T(K) × 9/5 - 459.67
+        return ((temp * 9 / 5) - 459.67).toFixed(1);
     };
+    this.doCelsiusConversion = function() { //public T(°C) = T(K) - 273.15
+        return (temp - 273.15).toFixed(1);
+    };
+
 }
 
 var DateConversion = function(_timeStamp) {
     var timeStamp = _timeStamp;
-    this.doTimeConversion = function (){ //public
-        var myDate = new Date( timeStamp * 1000);
+    this.doTimeConversion = function() { //public
+        var myDate = new Date(timeStamp * 1000);
         return (myDate.toGMTString()).substring(0, 11);
     };
-    this.dolocalTimeConversion = function (){ //public
-        var myDate = new Date( timeStamp * 1000);
+    this.dolocalTimeConversion = function() { //public
+        var myDate = new Date(timeStamp * 1000);
         return (myDate.toLocaleString()).substring(0, 8);
     };
 }
@@ -111,58 +115,65 @@ var DateConversion = function(_timeStamp) {
 // helper function for showing messages in a timely fashion
 var SetMessageTimer = function(_element, _className, _timer) {
     var element = _element; // private
-    var className = _className;  // private
-    var timer = _timer;  // private
-    this.showMessage = function (){ //public
-        window.setTimeout(function(){$(element).removeClass(className); } ,timer);
+    var className = _className; // private
+    var timer = _timer; // private
+    this.showMessage = function() { //public
+        window.setTimeout(function() {
+            $(element).removeClass(className);
+        }, timer);
     };
 };
 
 // helper for Ajax successHandler for weather report
 function weatherReport(data) {
-    var weather = data;
+        var weather = data;
+        var kelvinTemp = weather.main.temp;
+        var toFahrenheit = new TemperatureConversion(kelvinTemp);
+        var showUpdatedFahrenheitTemp = toFahrenheit.doFahrenheitConversion();
 
-    var kelvinTemp =  weather.main.temp;
-    var toFahrenheit = new TemperatureConversion(kelvinTemp);
-    var showUpdatedTemp = toFahrenheit.doConversion();
+        var toCelsius = new TemperatureConversion(kelvinTemp);
+        var showUpdatedCelsiusTemp = toCelsius.doCelsiusConversion();
 
-    var dateObj = weather.dt;
-    var toDate = new DateConversion(dateObj);
-    var showUpdatedDate = toDate.dolocalTimeConversion();
+        var dateObj = weather.dt;
+        var toDate = new DateConversion(dateObj);
+        var showUpdatedDate = toDate.dolocalTimeConversion();
 
-    if (weather.cod !== '404') {
-        $('#js-container-message').text('').removeClass('container-message bg-danger');
-        $('.js-today-report').text(showUpdatedDate)
-        $('#js-city').text(weather.name);
-        $('#js-country').text(weather.sys.country);
-        $('#js-weather-description').text(weather.weather[0].description);
-        $('#js-weather-main').text();
-        $('#js-weather-temp').text(showUpdatedTemp);
-        $('#js-img-icon').prop('src', 'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png');
-        $('#js-container-report').removeClass('hidden');
-    } else {
-        $('#js-container-message').text(weather.message).addClass('container-message bg-danger');
-        var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
-        setMessageTimerCall.showMessage();
+        if (weather.cod !== '404') {
+            $('#js-container-message').text('').removeClass('container-message bg-danger');
+            $('.js-today-report').text(showUpdatedDate)
+            $('#js-city').text(weather.name);
+            $('#js-country').text(weather.sys.country);
+            $('#js-weather-description').text(weather.weather[0].description);
+            $('#js-weather-main').text();
+            $('#js-weather-temp').html(showUpdatedFahrenheitTemp + "<sup>&deg;F</sup> | " + showUpdatedCelsiusTemp + "<sup>&deg;C</sup>");
+            $('#js-img-icon').prop('src', 'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png');
+            $('#js-container-report').removeClass('hidden');
+        } else {
+            $('#js-container-message').text(weather.message).addClass('container-message bg-danger');
+            var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
+            setMessageTimerCall.showMessage();
+        }
     }
-}
-// helper for Ajax successHandler for weather forcast
+    // helper for Ajax successHandler for weather forcast
 function weatherForecastReport(data) {
     var weather = data;
     var listLen = weather.list.length;
     var htmlCode = '';
     if (weather.cod !== '404') {
-        for(var i=0; i<listLen; i++){
+        for (var i = 0; i < listLen; i++) {
             var weatherObj = weather.list[i].temp.day;
             var toFahrenheit = new TemperatureConversion(weatherObj);
-            var showUpdatedTemp = toFahrenheit.doConversion();
+            var showUpdatedFahrenheitTemp = toFahrenheit.doFahrenheitConversion();
+
+            var toCelsius = new TemperatureConversion(weatherObj);
+            var showUpdatedCelsiusTemp = toCelsius.doCelsiusConversion();
 
             var dateObj = weather.list[i].dt;
             var toDate = new DateConversion(dateObj);
             var showUpdatedDate = toDate.doTimeConversion();
 
-            htmlCode = '<div class="forcast-report col-md-2"><div>'+showUpdatedDate+'</div><img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" /><span>';
-            htmlCode += showUpdatedTemp + '<sup>&deg;F</sup></span><div>' + weather.list[i].weather[0].description + '</div>';
+            htmlCode = '<div class="forcast-report col-md-2"><div>' + showUpdatedDate + '</div><img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" /><span>';
+            htmlCode += showUpdatedFahrenheitTemp + '<sup>&deg;F</sup> | </span>' + showUpdatedCelsiusTemp + '<sup>&deg;C</sup><span></span><div>' + weather.list[i].weather[0].description + '</div>';
             $('.js-forcast-container-report').append(htmlCode);
         }
         // To extend the border for the last
@@ -186,7 +197,7 @@ function searchGetLocation(cityName, $latitude, $longitude) {
         url: 'http://api.openweathermap.org/data/2.5/weather?APPID=Your-APP-ID',
         data: accessLocation(cityName, $latitude, $longitude),
         success: weatherReport,
-        error: function (textStatus, error) {
+        error: function(textStatus, error) {
             var err = textStatus + ', ' + error;
             console.log('Request Failed: ' + err);
         }
@@ -198,7 +209,7 @@ function searchGetLocation(cityName, $latitude, $longitude) {
         url: 'http://api.openweathermap.org/data/2.5/forecast/daily?APPID=Your-APP-ID&cnt=5',
         data: accessLocation(cityName, $latitude, $longitude),
         success: weatherForecastReport,
-        error: function (textStatus, error) {
+        error: function(textStatus, error) {
             var err = textStatus + ', ' + error;
             console.log('Request Failed: ' + err);
         }
