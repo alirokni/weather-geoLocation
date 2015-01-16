@@ -124,6 +124,17 @@ var SetMessageTimer = function(_element, _className, _timer) {
     };
 };
 
+var selectDegree = function(){
+    $('#js-weather-temp-F').on('click',function(){
+        $('.js-fahrenheit-temp').show();
+        $('.js-celsius-temp').hide();
+    });
+    $('#js-weather-temp-C').on('click',function(){
+        $('.js-fahrenheit-temp').hide();
+        $('.js-celsius-temp').show();
+    });
+};
+
 // helper for Ajax successHandler for weather report
 function weatherReport(data) {
         var weather = data;
@@ -145,16 +156,46 @@ function weatherReport(data) {
             $('#js-country').text(weather.sys.country);
             $('#js-weather-description').text(weather.weather[0].description);
             $('#js-weather-main').text();
-            $('#js-weather-temp').html(showUpdatedFahrenheitTemp + "<sup>&deg;F</sup> | " + showUpdatedCelsiusTemp + "<sup>&deg;C</sup>");
+            $('#js-weather-temp-F').html(showUpdatedFahrenheitTemp + " <span class='js-f-d f-d mute'>&deg;F</span>");
+            $('#js-weather-temp-C').html(showUpdatedCelsiusTemp + " <span class='js-c-d c-d'>&deg;C</span>");
             $('#js-img-icon').prop('src', 'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png');
             $('#js-container-report').removeClass('hidden');
+
         } else {
             $('#js-container-message').text(weather.message).addClass('container-message bg-danger');
             var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
             setMessageTimerCall.showMessage();
         }
+    
+    getDisplayedDegree();
+    
     }
-    // helper for Ajax successHandler for weather forcast
+
+// helper for displaying selecetd degree
+var getDisplayedDegree = function() {
+    $('.js-c-d.c-d').on('click', function(){
+        if( $('.js-f-d.f-d').hasClass('mute') ) {
+            $('.js-c-d.c-d').addClass('mute');
+            $('.js-f-d.f-d').removeClass('mute');
+            $('.js-celsius-temp').addClass('bg-info');
+            var setMessageTimerCelsius = new SetMessageTimer('.js-celsius-temp', 'bg-info', 1000);
+                setMessageTimerCelsius.showMessage();   
+        }
+    }) 
+    
+    $('.js-f-d.f-d').on('click', function(){
+        if( $('.js-c-d.c-d').hasClass('mute') ) {
+            $('.js-f-d.f-d').addClass('mute');
+            $('.js-c-d.c-d').removeClass('mute');
+            $('.js-fahrenheit-temp').addClass('bg-info');
+            var setMessageTimerFahrenheit = new SetMessageTimer('.js-fahrenheit-temp', 'bg-info', 1000);
+            setMessageTimerFahrenheit.showMessage();
+        }
+    })
+}
+
+
+// helper for Ajax successHandler for weather forcast
 function weatherForecastReport(data) {
     var weather = data;
     var listLen = weather.list.length;
@@ -171,10 +212,16 @@ function weatherForecastReport(data) {
             var dateObj = weather.list[i].dt;
             var toDate = new DateConversion(dateObj);
             var showUpdatedDate = toDate.doTimeConversion();
-
-            htmlCode = '<div class="forcast-report col-md-2"><div>' + showUpdatedDate + '</div><img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" /><span>';
-            htmlCode += showUpdatedFahrenheitTemp + '<sup>&deg;F</sup> | </span>' + showUpdatedCelsiusTemp + '<sup>&deg;C</sup><span></span><div>' + weather.list[i].weather[0].description + '</div>';
+            
+            htmlCode = '<div class="forcast-report col-md-2"><div>' + showUpdatedDate + '</div>';
+            htmlCode += '<img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" />';
+            htmlCode += '<span class="js-fahrenheit-temp fahrenheit-temp">' + showUpdatedFahrenheitTemp + '<sup>&deg;F</sup></span> ';
+            htmlCode += '<span class="js-celsius-temp celsius-temp">' + showUpdatedCelsiusTemp + '<sup>&deg;C</sup></span>';
+            htmlCode += '<div>' + weather.list[i].weather[0].description + '</div></div>';
+            
             $('.js-forcast-container-report').append(htmlCode);
+            
+            selectDegree();
         }
         // To extend the border for the last
         $('.forcast-report').last().removeClass('col-md-2').addClass('col-md-4');
