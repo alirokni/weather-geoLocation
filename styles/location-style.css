@@ -36,6 +36,9 @@ h1.title {
     padding: 0;
 }
 
+.container-report {
+    padding-top: .9rem;
+}
 .search-location,.geo-location,.container-geo {
     margin: 2rem 0;
 }
@@ -74,4 +77,23 @@ h1.title {
     border-bottom: 1px solid gray;
     border-left: 1px solid #FFF;
     border-right: 1px solid gray;
+}
+
+.celsius-temp {
+    display: none;
+}
+
+.f-d, .c-d {
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+    background: #337ab7;
+    border-radius: 3px;
+    padding: .2rem .5rem;
+}
+
+.mute {
+    background: inherit;
+    color: inherit;
+    cursor: inherit;
 }
