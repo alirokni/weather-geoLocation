@@ -165,9 +165,9 @@ function weatherReport(data) {
             var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
             setMessageTimerCall.showMessage();
         }
-    
+
     getDisplayedDegree();
-    
+
     }
 
 // helper for displaying selecetd degree
@@ -178,9 +178,9 @@ var getDisplayedDegree = function() {
             $('.js-f-d.f-d').removeClass('mute');
             $('.js-celsius-temp').addClass('bg-info');
             var setMessageTimerCelsius = new SetMessageTimer('.js-celsius-temp', 'bg-info', 1000);
-                setMessageTimerCelsius.showMessage();   
+                setMessageTimerCelsius.showMessage();
         }
-    }) 
+    })
 
     $('.js-f-d.f-d').on('click', function(){
         if( $('.js-c-d.c-d').hasClass('mute') ) {
@@ -211,13 +211,13 @@ function weatherForecastReport(data) {
             var dateObj = weather.list[i].dt;
             var toDate = new DateConversion(dateObj);
             var showUpdatedDate = toDate.doTimeConversion();
-            
+
             htmlCode = '<div class="forcast-report col-md-2"><div>' + showUpdatedDate + '</div>';
             htmlCode += '<img src="http://openweathermap.org/img/w/' + weather.list[i].weather[0].icon + '.png" />';
             htmlCode += '<span class="js-fahrenheit-temp fahrenheit-temp">' + showUpdatedFahrenheitTemp + '<sup>&deg;F</sup></span> ';
             htmlCode += '<span class="js-celsius-temp celsius-temp">' + showUpdatedCelsiusTemp + '<sup>&deg;C</sup></span>';
             htmlCode += '<div>' + weather.list[i].weather[0].description + '</div></div>';
-            
+
             $('.js-forcast-container-report').append(htmlCode);
             selectDegree();
         }
@@ -268,11 +268,11 @@ function drawTemperatureChart(weather) {
     var dateNuObj = [];
     var faTempArr = [];
     var CeTempArr = [];
-    
+
     for (var k = 0; k < weather.list.length; k++) {
         var _dateObj = weather.list[k].dt;
         var _klTempObj = weather.list[k].temp.day;
-        
+
             var _toDate = new DateConversion(_dateObj);
             var _showUpdatedDate = _toDate.doTimeConversion();
 
@@ -284,16 +284,12 @@ function drawTemperatureChart(weather) {
 */
         faTempArr.push(parseFloat(_showUpdatedFahrenheitTemp));
         dateNuObj.push(_showUpdatedDate);
- 
+
     }
     $('#container').highcharts({
         title: {
             text: weather.city.name + ' Daily Temperature',
             x: -20 //center
-        },
-        subtitle: {
-            text: 'Source: openweathermap.org',
-            x: -20
         },
         xAxis: {
             categories: dateNuObj // Five days
