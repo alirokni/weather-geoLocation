@@ -160,7 +160,6 @@ function weatherReport(data) {
             $('#js-weather-temp-C').html(showUpdatedCelsiusTemp + " <span class='js-c-d c-d'>&deg;C</span>");
             $('#js-img-icon').prop('src', 'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png');
             $('#js-container-report').removeClass('hidden');
-
         } else {
             $('#js-container-message').text(weather.message).addClass('container-message bg-danger');
             var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
@@ -182,7 +181,7 @@ var getDisplayedDegree = function() {
                 setMessageTimerCelsius.showMessage();   
         }
     }) 
-    
+
     $('.js-f-d.f-d').on('click', function(){
         if( $('.js-c-d.c-d').hasClass('mute') ) {
             $('.js-f-d.f-d').addClass('mute');
@@ -220,7 +219,6 @@ function weatherForecastReport(data) {
             htmlCode += '<div>' + weather.list[i].weather[0].description + '</div></div>';
             
             $('.js-forcast-container-report').append(htmlCode);
-            
             selectDegree();
         }
         // To extend the border for the last
@@ -230,6 +228,7 @@ function weatherForecastReport(data) {
         var setMessageTimerCall = new SetMessageTimer('#js-container-report', 'bg-success', 3000);
         setMessageTimerCall.showMessage();
     }
+    drawTemperatureChart(weather);
 }
 
 // call openWeatherApi json data on success and display the result else show the error message
@@ -263,3 +262,64 @@ function searchGetLocation(cityName, $latitude, $longitude) {
     });
 
 }
+
+
+function drawTemperatureChart(weather) {
+    var dateNuObj = [];
+    var faTempArr = [];
+    var CeTempArr = [];
+    
+    for (var k = 0; k < weather.list.length; k++) {
+        var _dateObj = weather.list[k].dt;
+        var _klTempObj = weather.list[k].temp.day;
+        
+            var _toDate = new DateConversion(_dateObj);
+            var _showUpdatedDate = _toDate.doTimeConversion();
+
+            var _toFahrenheit = new TemperatureConversion(_klTempObj);
+            var _showUpdatedFahrenheitTemp = _toFahrenheit.doFahrenheitConversion();
+/*
+            var toCelsius = new TemperatureConversion(kelvinTemp);
+            var showUpdatedCelsiusTemp = toCelsius.doCelsiusConversion();
+*/
+        faTempArr.push(parseFloat(_showUpdatedFahrenheitTemp));
+        dateNuObj.push(_showUpdatedDate);
+ 
+    }
+    $('#container').highcharts({
+        title: {
+            text: weather.city.name + ' Daily Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: openweathermap.org',
+            x: -20
+        },
+        xAxis: {
+            categories: dateNuObj // Five days
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°F)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°F'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: weather.city.name,
+            data: faTempArr
+        }]
+    });
+};
