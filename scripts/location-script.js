@@ -91,10 +91,10 @@ epochconverter.com/
 
 var TemperatureConversion = function(_temperature) {
     var temp = _temperature;
-    this.doFahrenheitConversion = function() { //public T(K) × 9/5 - 459.67
+    this.doFahrenheitConversion = function() { //privileged method T(K) × 9/5 - 459.67
         return ((temp * 9 / 5) - 459.67).toFixed(1);
     };
-    this.doCelsiusConversion = function() { //public T(°C) = T(K) - 273.15
+    this.doCelsiusConversion = function() { //privileged method T(°C) = T(K) - 273.15
         return (temp - 273.15).toFixed(1);
     };
 
@@ -102,11 +102,11 @@ var TemperatureConversion = function(_temperature) {
 
 var DateConversion = function(_timeStamp) {
     var timeStamp = _timeStamp;
-    this.doTimeConversion = function() { //public
+    this.doTimeConversion = function() { //privileged method
         var myDate = new Date(timeStamp * 1000);
         return (myDate.toGMTString()).substring(0, 11);
     };
-    this.dolocalTimeConversion = function() { //public
+    this.dolocalTimeConversion = function() { //privileged method
         var myDate = new Date(timeStamp * 1000);
         return (myDate.toLocaleString()).substring(0, 8);
     };
@@ -117,7 +117,7 @@ var SetMessageTimer = function(_element, _className, _timer) {
     var element = _element; // private
     var className = _className; // private
     var timer = _timer; // private
-    this.showMessage = function() { //public
+    this.showMessage = function() { //privileged method
         window.setTimeout(function() {
             $(element).removeClass(className);
         }, timer);
