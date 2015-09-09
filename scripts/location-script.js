@@ -89,38 +89,38 @@ rapidtables.com/convert/temperature/index.htm
 epochconverter.com/
 */
 
-var TemperatureConversion = function(_temperature) {
-    var temp = _temperature;
+var TemperatureConversion = function(temperature) {
+    var _temp = temperature;
     this.doFahrenheitConversion = function() { //privileged method T(K) × 9/5 - 459.67
-        return ((temp * 9 / 5) - 459.67).toFixed(1);
+        return ((_temp * 9 / 5) - 459.67).toFixed(1);
     };
     this.doCelsiusConversion = function() { //privileged method T(°C) = T(K) - 273.15
-        return (temp - 273.15).toFixed(1);
+        return (_temp - 273.15).toFixed(1);
     };
 
 }
 
-var DateConversion = function(_timeStamp) {
-    var timeStamp = _timeStamp;
+var DateConversion = function(timeStamp) {
+    var _timeStamp = timeStamp;
     this.doTimeConversion = function() { //privileged method
-        var myDate = new Date(timeStamp * 1000);
+        var myDate = new Date(_timeStamp * 1000);
         return (myDate.toGMTString()).substring(0, 11);
     };
     this.dolocalTimeConversion = function() { //privileged method
-        var myDate = new Date(timeStamp * 1000);
+        var myDate = new Date(_timeStamp * 1000);
         return (myDate.toLocaleString()).substring(0, 8);
     };
 }
 
 // helper function for showing messages in a timely fashion
-var SetMessageTimer = function(_element, _className, _timer) {
-    var element = _element; // private
-    var className = _className; // private
-    var timer = _timer; // private
+var SetMessageTimer = function(element, className, timer) {
+    var _element = element; // private
+    var _className = className; // private
+    var _timer = timer; // private
     this.showMessage = function() { //privileged method
         window.setTimeout(function() {
-            $(element).removeClass(className);
-        }, timer);
+            $(_element).removeClass(_className);
+        }, _timer);
     };
 };
 
