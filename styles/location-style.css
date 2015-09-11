@@ -11,7 +11,7 @@ h1.title {
     font-size: 2.4rem;/* = 24px */;
 }
 
-.header-report h1,.forcast-header-report h2 {
+.header-report h1,.forecast-header-report h2 {
     font-size: 1.4rem;
 }
 
@@ -57,23 +57,23 @@ h1.title {
     padding-right: 2.5rem;
 }
 
-.forcast-header-report {
+.forecast-header-report {
     margin-bottom: 1rem;
     margin-top: 2rem;
 }
 
-.forcast-container-report {
+.forecast-container-report {
     background-color: #eaeaea;
     border-bottom: 1px solid gray;   
 }
 
-.forcast-report {
+.forecast-report {
     border-left: 1px solid #FFF;
     display: inline-block;
     padding: 0 1em 0 .5em;
 }
 
-.forcast-report:not(:last-child) {
+.forecast-report:not(:last-child) {
     border-left: 1px solid #FFF;
     border-right: 1px solid gray;
 }
