@@ -3,8 +3,9 @@ var myGeoLocationApp = myGeoLocationApp || (function () {
 
   // Initial weather report function
   var initialCityWeatherReport = function () {
-      var initialCity = 'Paris';
-      _searchGetLocation(initialCity)
+    var initialCityArray = ["Pal Alto","Paris","San Francisco","London","Tehran","Rome","Tokyo","Amsterdam","Beijing","Lima","Havana"],
+        initialCity = initialCityArray[Math.floor(Math.random() * initialCityArray.length)];
+    _searchGetLocation(initialCity)
     },
     // helper function for showing messages in a timely fashion
     SetMessageTimer = function (element, className, timer) {
