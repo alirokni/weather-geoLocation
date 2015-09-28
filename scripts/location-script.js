@@ -224,11 +224,11 @@ var myGeoLocationApp = myGeoLocationApp || (function () {
       var _timeStamp = timeStamp;
       this.doTimeConversion = function () { //privileged method
         var myDate = new Date(_timeStamp * 1000);
-        return (myDate.toGMTString()).substring(0, 11)
+        return (myDate.toUTCString()).substring(0, 11)
       };
       this.dolocalTimeConversion = function () { //privileged method
         var myDate = new Date(_timeStamp * 1000);
-        return (myDate.toLocaleString()).substring(0, 8)
+        return (myDate.toLocaleString()).substring(0, 9)
       }
     },
     _selectDegree = function () {
