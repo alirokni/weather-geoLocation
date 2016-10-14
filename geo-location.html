@@ -32,20 +32,43 @@
 
         <header class="js-forecast-header-report forecast-header-report">
             <h2>And 5 Day Weather Forecast for the city:</h2>
+   <div>
+    <header>
+         <h1 class="title">Weather Report</h1>
+    </header>
+    <article>
+        <header id="js-header-report" class="header-report">
+            <h1>Today's (<span class="js-today-report today-report" ></span>) weather report of <b><span id="js-city"></span></b>, <span id="js-country"></span>:</h1>
+        </header>
+        <section>
+            <div id="js-container-report" class="container-report hidden">
+                <div>
+                    <img id="js-img-icon" style="vertical-align: middle;" alt="image of today's weather" src="" />
+                    <span id="js-weather-temp-F"><span id="temp-F"> </span> <span class="js-f-d f-d mute">&deg;F</span></span>
+                    <span id="js-weather-temp-C"><span id="temp-C"> </span> <span class="js-c-d c-d">&deg;C</span></span>
+                    <span id="js-weather-description"></span>
+                </div>
+            </div>
+        </section>
+
+        <div id="js-container-message" class="container-message"></div>
+
+        <header class="js-forecast-header-report forecast-header-report">
+            <h2>And 5 Day Weather Forecast for the city:</h2>
         </header>
         <section class="container-fluid">
             <div class="js-forecast-container-report forecast-container-report row"></div>
             <div id="container" class="col-md-12 chart"></div>
         </section>
 
-        <section>
+        <section class="">
             <ul id="js-container-geo" class="container-geo">
                 <li class="weather-intro">
-                    Get weather report of your location or any other location; let it be found<sup>1</sup>or search<sup>2</sup> for it:
+                    Get weather report of your location or any other location; let it be found<sup>1</sup>, lookup using device's IP<sup>2</sup> or search<sup>3</sup> for it:
                 </li>
                 <li class="geo-location">
                     <div id="loader"></div>
-                    <button id="js-geo-btn" class="geo-btn btn btn-primary">Find your Geolocation</button>
+                    <button id="js-geo-btn" class="geo-btn btn btn-lg btn-primary">Find your Geolocation</button>
                     <ul id="js-location-list" class="location-list hidden">
                         <li><b>Latitude:</b> <span id="js-lat"></span></li>
                         <li><b>Longitude:</b> <span id="js-lon"></span></li>
@@ -64,6 +87,7 @@
                 To provide weather report for your location or any other locations, you can:
                 <ol>
                     <li class="js-geolocation-note">Use HTML5 Geolocation API <sup>*</sup></li>
+                    <li class="js-ipinfo-note">Use the ipinfo.io IP lookup API to quickly and simply integrate IP geolocation</li>
                     <li>Search by entering city and country or zip-code</li>
                 </ol>
                 <div class="js-geolocation-note"><sup>*</sup> This application relies on accessing geographical location information of hosting device,
